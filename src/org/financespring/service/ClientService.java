@@ -7,6 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public interface ClientService {
 
     public void saveClient(Client client);
-    
+
 
 }
