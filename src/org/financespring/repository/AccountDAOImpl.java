@@ -1,7 +1,6 @@
 package org.financespring.repository;
 
-import org.financespring.model.Client;
-import org.hibernate.Hibernate;
+import org.financespring.model.Account;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,40 +9,41 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ClientDAOImpl implements ClientDAO {
+public class AccountDAOImpl implements AccountDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public Client getEntityById(Class entityClass, int id) {
+    public Account getEntityById(Class entityClass, int id) {
         Session session = sessionFactory.getCurrentSession();
-        Client currentClient = (Client) session.get(Client.class, id);
-        return currentClient;
+        Account account = (Account) session.get(entityClass, id);
+        return account;
     }
 
     @Override
-    public void saveEntity(Client client) {
+    public void saveEntity(Account entity) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(client);
+        session.save(entity);
     }
 
     @Override
-    public void deleteEntity(Client client) {
+    public void updateEntity(Account entity) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(client);
+        session.update(entity);
     }
 
     @Override
-    public void updateEntity(Client client) {
+    public void deleteEntity(Account entity) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(client);
+        session.delete(entity);
     }
 
     @Override
-    public List<Client> getListOfEntities() {
+    public List<Account> getListOfEntities() {
         Session session = sessionFactory.getCurrentSession();
-        List<Client> listOfClients = session.createQuery("from Client").list();
-        return listOfClients;
+        List<Account> listOfAccounts = session.createQuery("from Account").list();
+        return listOfAccounts;
     }
+
 }

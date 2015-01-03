@@ -4,9 +4,7 @@ import org.financespring.model.Client;
 import org.financespring.repository.ClientDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public interface ClientService {
+import java.util.List;
 
-    public void saveClient(Client client);
-
-
+public interface ClientService extends EntityService<Client> {
 }

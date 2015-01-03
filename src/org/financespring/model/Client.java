@@ -1,8 +1,7 @@
 package org.financespring.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "client")
@@ -22,6 +21,9 @@ public class Client extends BaseEntity {
 
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
+
+    @OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
+    private Set<Account> setOfAccounts;
 
     public String getFirstName() {
         return firstName;
@@ -61,5 +63,17 @@ public class Client extends BaseEntity {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Set<Account> getSetOfAccounts() {
+        return setOfAccounts;
+    }
+
+    public void setSetOfAccounts(Set<Account> setOfAccounts) {
+        this.setOfAccounts = setOfAccounts;
+    }
+
+    public String getDisplayName() {
+        return firstName + " " + lastName;
     }
 }

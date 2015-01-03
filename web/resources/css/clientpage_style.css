@@ -1,0 +1,20 @@
+#client-buttons {
+    position: absolute;
+}
+
+.client-button {
+    width: 80px;
+}
+
+.show-client-button {
+    position: absolute;
+    top: 25px;
+    width: 248px;
+}
+
+.clients-list {
+    position: absolute;
+    top: 60px;
+    width: 248px;
+}
+

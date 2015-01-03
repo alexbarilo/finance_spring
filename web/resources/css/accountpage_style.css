@@ -1,0 +1,13 @@
+#client-details {
+    background-color: gainsboro;
+    position: absolute;
+    left: 270px;
+}
+
+.account-buttons {
+    width: 150px;
+}
+
+#account-popup {
+    width: 200px;
+}
