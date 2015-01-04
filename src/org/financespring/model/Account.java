@@ -24,7 +24,7 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "client_id")
     private Client clientId;
 
-    @OneToMany(mappedBy = "accountId")
+    @OneToMany(mappedBy = "accountId", fetch = FetchType.EAGER)
     private Set<BankTransaction> setOfTransactions;
 
     public String getAccountNumber() {

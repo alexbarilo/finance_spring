@@ -99,7 +99,6 @@ public class ClientController {
 
                 model.addAttribute("client", currentClient);
                 model.addAttribute("listOfClients", listOfClients);
-                //model.addAttribute("listOfAccounts", listOfAccounts); //change to currentClient.getSetOfAccounts()
                 model.addAttribute("account", account);
 
                 chosenClientAction = "accountpage";

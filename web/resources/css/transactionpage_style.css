@@ -1,0 +1,29 @@
+#account-details {
+    position: absolute;
+    top: 105px;
+    left: 265px;
+    width: 970px;
+}
+
+#account-details {
+    background-color: gainsboro;
+}
+
+#transaction-list {
+    position: absolute;
+    top: 182px;
+    left: 265px;
+}
+
+#transactions-table {
+    border-collapse: collapse;
+}
+
+#transactions-table tr th{
+    border: 2px solid black;
+    width: 238px;
+}
+
+#transactions-table tr td {
+    border: 1px solid black;
+}

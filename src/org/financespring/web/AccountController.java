@@ -1,8 +1,10 @@
 package org.financespring.web;
 
 import org.financespring.model.Account;
+import org.financespring.model.BankTransaction;
 import org.financespring.model.Client;
 import org.financespring.service.AccountService;
+import org.financespring.service.BankTransactionService;
 import org.financespring.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"client", "listOfClients"})
+@SessionAttributes({"client", "listOfClients", "account"})
 public class AccountController {
 
     @Autowired
@@ -87,9 +89,31 @@ public class AccountController {
                 chosenAccountAction = "newaccountpage";
                 break;
             case "showaccountdetails" :
-
+                accountId = 0;
+                try {
+                    accountId = Integer.parseInt(selectedAccount);
+                } catch (NumberFormatException e) {
+                    //redirection to error-page
+                }
+                account = accountService.getEntityById(Account.class, accountId);
+                model.addAttribute("account", account);
+                chosenAccountAction = "transactionpage";
                 break;
-            case "addtransaction" : break;
+            case "addtransaction" :
+                accountId = 0;
+                try {
+                    accountId = Integer.parseInt(selectedAccount);
+                } catch (NumberFormatException e) {
+                    //redirection to error-page
+                }
+                currentAccount = accountService.getEntityById(Account.class, accountId);
+                BankTransaction bankTransaction = new BankTransaction();
+
+                model.addAttribute("account", currentAccount);
+                model.addAttribute("transaction", bankTransaction);
+
+                chosenAccountAction = "newtransactionpage";
+                break;
         }
 
         return chosenAccountAction;
