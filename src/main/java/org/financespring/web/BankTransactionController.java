@@ -25,11 +25,27 @@ public class BankTransactionController {
     @Autowired
     private AccountService accountService;
 
+    @RequestMapping(value = "accountdetails", method = RequestMethod.GET)
+    public String showAccountDetails(Model model) {
+        Client client = new Client();
+        model.addAttribute("client", client);
+        return "accountpage";
+    }
+
     @RequestMapping(value = "newtransaction", method = RequestMethod.POST)
     public String addNewBankTransaction(@ModelAttribute(value = "transaction") BankTransaction bankTransaction,
                                         HttpServletRequest request, Model model) {
 
         Account account = (Account) request.getSession().getAttribute("account");
+        float transactionAmount = bankTransactionService.getTotalTransactionsAmount() + bankTransaction.getBenAmount();
+        float currentAccountAmount = account.getAmount();
+
+        if(transactionAmount > currentAccountAmount) {
+            request.setAttribute("message", "The account amount is insufficient to provide current transaction");
+            request.setAttribute("action", "accountdetails");
+            return "error-page";
+        }
+
         bankTransaction.setAccountId(account);
         bankTransactionService.saveEntity(bankTransaction);
 

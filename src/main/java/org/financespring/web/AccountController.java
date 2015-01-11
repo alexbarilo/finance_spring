@@ -25,6 +25,13 @@ public class AccountController {
     @Autowired
     private ClientService clientService;
 
+    @RequestMapping(value = "clientdetails", method = RequestMethod.GET)
+    public String showClientDetails(Model model) {
+        Account account = new Account();
+        model.addAttribute("account", account);
+        return "accountpage";
+    }
+
     @RequestMapping(value = "newaccount", method = RequestMethod.POST)
     public String addNewAccount(@ModelAttribute(value = "account") Account account ,
                                 HttpServletRequest request, Model model) {
@@ -56,18 +63,22 @@ public class AccountController {
         accountAction = accountAction.replaceAll("\\s", "").toLowerCase();
         String chosenAccountAction = "accountpage";
 
+        int accountId = 0;
+
         switch(accountAction) {
             case "addaccount" :
                 Account account = new Account();
                 model.addAttribute("account", account);
+
                 chosenAccountAction = "newaccountpage";
                 break;
             case "delaccount" :
-                int accountId = 0;
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
-                    //redirection to error-page
+                    request.setAttribute("message", "There is no account to delete");
+                    request.setAttribute("action", "clientdetails");
+                    return "error-page";
                 }
                 Account currentAccount = accountService.getEntityById(Account.class, accountId);
                 accountService.deleteEntity(currentAccount);
@@ -78,33 +89,38 @@ public class AccountController {
                 model.addAttribute("account", account);
                 break;
             case "editaccount" :
-                accountId = 0;
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
-                    e.printStackTrace();
+                    request.setAttribute("message", "There is no account to edit");
+                    request.setAttribute("action", "clientdetails");
+                    return "error-page";
                 }
                 account = accountService.getEntityById(Account.class, accountId);
                 model.addAttribute("account", account);
+
                 chosenAccountAction = "newaccountpage";
                 break;
             case "showaccountdetails" :
-                accountId = 0;
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
-                    //redirection to error-page
+                    request.setAttribute("message", "The current client has no accounts");
+                    request.setAttribute("action", "clientdetails");
+                    return "error-page";
                 }
                 account = accountService.getEntityById(Account.class, accountId);
                 model.addAttribute("account", account);
+
                 chosenAccountAction = "transactionpage";
                 break;
             case "addtransaction" :
-                accountId = 0;
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
-                    //redirection to error-page
+                    request.setAttribute("message", "There are no accounts to make bank transaction");
+                    request.setAttribute("action", "clientdetails");
+                    return "error-page";
                 }
                 currentAccount = accountService.getEntityById(Account.class, accountId);
                 BankTransaction bankTransaction = new BankTransaction();

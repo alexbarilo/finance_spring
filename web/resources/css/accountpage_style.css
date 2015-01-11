@@ -1,6 +1,13 @@
 #client-details {
     background-color: lightsteelblue;
+    width: 970px;
     position: absolute;
+    left: 265px;
+}
+
+#account-actions {
+    position: absolute;
+    top: 80px;
     left: 265px;
 }
 

@@ -9,10 +9,40 @@
 <body>
     <jsp:include page="accountpage.jsp"/>
     <div id="account-details">
-        Account number: <c:out value="${account.accountNumber}"/><br>
-        Account amount: <c:out value="${account.amount}"/><br>
-        Account currency: <c:out value="${account.currency}"/><br>
-        Date of Issue: <c:out value="${account.date}"/><br>
+        <table>
+            <tr>
+                <td>
+                    <b>Account number:</b>
+                </td>
+                <td>
+                    <c:out value="${account.accountNumber}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Account amount:</b>
+                </td>
+                <td>
+                    <c:out value="${account.amount}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Account currency:</b>
+                </td>
+                <td>
+                    <c:out value="${account.currency}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Date of Issue:</b>
+                </td>
+                <td>
+                    <c:out value="${account.date}"/>
+                </td>
+            </tr>
+        </table>
     </div>
     <div id="transaction-list">
         <table id="transactions-table">

@@ -11,9 +11,34 @@
 <body>
     <jsp:include page="clientpage.jsp"/>
     <div id="client-details">
-        Client name:<c:out value="${sessionScope.client.displayName}"/><br>
-        Client address:<c:out value="${sessionScope.client.address}"/><br>
-        Client city:<c:out value="${sessionScope.client.city}"/> / <c:out value="${client.postalCode}"/>
+        <table>
+            <tr>
+                <td>
+                    <b>Client name:</b>
+                </td>
+                <td>
+                    <c:out value="${sessionScope.client.displayName}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Client address:</b>
+                </td>
+                <td>
+                    <c:out value="${sessionScope.client.address}"/><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Client city:</b>
+                </td>
+                <td>
+                    <c:out value="${sessionScope.client.city}"/> / <c:out value="${client.postalCode}"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="account-actions">
         <form:form action="accountselection" method="post" modelAttribute="account">
             <form:select id="account-popup" path="id">
                 <form:options items="${sessionScope.client.setOfAccounts}" itemValue="id" itemLabel="accountNumber" />

@@ -1,5 +1,6 @@
 package org.financespring.service;
 
+import org.financespring.model.Account;
 import org.financespring.model.BankTransaction;
 import org.financespring.repository.BankTransactionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,16 @@ public class BankTransactionServiceImpl implements BankTransactionService {
     public List<BankTransaction> getListOfEntities() {
         List<BankTransaction> listOfTransactions = bankTransactionDAO.getListOfEntities();
         return listOfTransactions;
+    }
+
+    @Override
+    @Transactional
+    public float getTotalTransactionsAmount() {
+        float totalAmount = 0.0f;
+        List<BankTransaction> listOfTransactions = bankTransactionDAO.getListOfEntities();
+        for (BankTransaction transaction : listOfTransactions) {
+            totalAmount = totalAmount + transaction.getBenAmount();
+        }
+        return totalAmount;
     }
 }

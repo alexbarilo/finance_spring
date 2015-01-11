@@ -43,7 +43,7 @@ public class ClientController {
         }
         List<Client> listOfClients = clientService.getListOfEntities();
         model.addAttribute("listOfClients", listOfClients);
-        model.addAttribute("client", new Client()); //check if it is needed as any further client-attributes
+        //model.addAttribute("client", new Client()); //works without "client"
         return "clientpage";
     }
 
@@ -56,18 +56,22 @@ public class ClientController {
 
         clientAction = clientAction.replaceAll("\\s","").toLowerCase();
 
+        int clientId = 0;
+
         switch(clientAction) {
             case "addclient" :
-                chosenClientAction = "newclientpage";
                 Client client = new Client();
                 model.addAttribute("client", client);
+
+                chosenClientAction = "newclientpage";
                 break;
             case "delclient" :
-                int clientId = 0;
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
-                    // redirection to error-page
+                    request.setAttribute("message", "Please choose a client to delete");
+                    request.setAttribute("action", "/");
+                    return "error-page";
                 }
                 Client currentClient = clientService.getEntityById(Client.class, clientId);
                 clientService.deleteEntity(currentClient);
@@ -75,28 +79,29 @@ public class ClientController {
                 model.addAttribute("listOfClients", listOfClients);
                 break;
             case "editclient" :
-                clientId = 0;
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
-                    // redirection to error-page
+                    request.setAttribute("message", "Please choose a client to edit");
+                    request.setAttribute("action", "/");
+                    return "error-page";
                 }
                 currentClient = clientService.getEntityById(Client.class, clientId);
                 model.addAttribute("client", currentClient);
+
                 chosenClientAction = "newclientpage";
                 break;
             case "showclientdetails" :
-                clientId = 0;
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
-                    // redirection to error-page
+                    request.setAttribute("message", "Please choose a client to show details");
+                    request.setAttribute("action", "/");
+                    return "error-page";
                 }
                 currentClient = clientService.getEntityById(Client.class, clientId);
                 listOfClients = clientService.getListOfEntities();
-                List<Account> listOfAccounts = accountService.getListOfEntities();
                 Account account = new Account();
-
                 model.addAttribute("client", currentClient);
                 model.addAttribute("listOfClients", listOfClients);
                 model.addAttribute("account", account);

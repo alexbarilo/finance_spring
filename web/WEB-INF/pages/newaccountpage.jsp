@@ -7,22 +7,51 @@
     <title></title>
 </head>
 <body>
-    Current client: <c:out value="${sessionScope.client.displayName}"/><br>
+    <b>Current client: <c:out value="${sessionScope.client.displayName}"/></b><br>
     <form:form action="newaccount" method="post" modelAttribute="account">
-        <form:hidden path="id" value="${account.id}"/>
-        <form:label path="accountNumber">Account number</form:label>
-        <form:input path="accountNumber" value="${account.accountNumber}"></form:input><br>
-        <form:label path="amount">Amount</form:label>
-        <form:input path="amount" value="${account.amount}"></form:input><br>
-        <form:label path="currency">Currency</form:label>
-        <form:select path="currency" itemValue="${account.currency}">
-            <form:option value="USD">USD</form:option>
-            <form:option value="EUR">EUR</form:option>
-            <form:option value="UAH">UAH</form:option>
-        </form:select><br>
-        <form:label path="date"><Date></Date></form:label>
-        <form:input path="date" type="date" value="${account.date}"></form:input><br>
+        <table id="new-account">
+            <tbody>
+                <form:hidden path="id" value="${account.id}"/>
+                <tr>
+                    <td>
+                        <form:label path="accountNumber">Account number</form:label>
+                    </td>
+                    <td>
+                        <form:input path="accountNumber" value="${account.accountNumber}"></form:input><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form:label path="amount">Amount</form:label>
+                    </td>
+                    <td>
+                        <form:input path="amount" value="${account.amount}"></form:input><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form:label path="currency">Currency</form:label>
+                    </td>
+                    <td>
+                        <form:select path="currency" itemValue="${account.currency}">
+                            <form:option value="USD">USD</form:option>
+                            <form:option value="EUR">EUR</form:option>
+                            <form:option value="UAH">UAH</form:option>
+                        </form:select><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form:label path="date">Date</form:label>
+                    </td>
+                    <td>
+                        <form:input path="date" type="date" value="${account.date}"></form:input><br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <input type="submit" value="Submit"/>
     </form:form>
+    <a href="<c:url value="clientdetails"/>">Back to previous page</a>
 </body>
 </html>

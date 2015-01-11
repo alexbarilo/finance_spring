@@ -1,8 +1,8 @@
 #account-details {
     position: absolute;
+    width: 970px;
     top: 105px;
     left: 265px;
-    width: 970px;
 }
 
 #account-details {
@@ -11,7 +11,7 @@
 
 #transaction-list {
     position: absolute;
-    top: 182px;
+    top: 200px;
     left: 265px;
 }
 
@@ -26,4 +26,5 @@
 
 #transactions-table tr td {
     border: 1px solid black;
+    text-align: center;
 }

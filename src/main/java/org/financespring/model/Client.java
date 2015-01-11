@@ -1,5 +1,8 @@
 package org.financespring.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,7 +25,8 @@ public class Client extends BaseEntity {
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
-    @OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER, orphanRemoval = true)
+    @Cascade({CascadeType.DELETE})
     private Set<Account> setOfAccounts;
 
     public String getFirstName() {
