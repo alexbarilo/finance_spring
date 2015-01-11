@@ -5,6 +5,7 @@
 <html>
 <head>
     <title></title>
+    <link href="${pageContext.request.contextPath}/resources/css/accountpage_style.css" rel="stylesheet" typ="text/css"/>
 </head>
 <body>
     <b>Current client: <c:out value="${sessionScope.client.displayName}"/></b><br>
@@ -17,7 +18,8 @@
                         <form:label path="accountNumber">Account number</form:label>
                     </td>
                     <td>
-                        <form:input path="accountNumber" value="${account.accountNumber}"></form:input><br>
+                        <form:input path="accountNumber" value="${account.accountNumber}"></form:input>
+                        <form:errors path="accountNumber" cssClass="errors"></form:errors><br>
                     </td>
                 </tr>
                 <tr>
@@ -25,7 +27,8 @@
                         <form:label path="amount">Amount</form:label>
                     </td>
                     <td>
-                        <form:input path="amount" value="${account.amount}"></form:input><br>
+                        <form:input path="amount" value="${account.amount}"></form:input>
+                        <form:errors path="amount" cssClass="errors"></form:errors><br>
                     </td>
                 </tr>
                 <tr>
@@ -37,7 +40,8 @@
                             <form:option value="USD">USD</form:option>
                             <form:option value="EUR">EUR</form:option>
                             <form:option value="UAH">UAH</form:option>
-                        </form:select><br>
+                        </form:select>
+                        <form:errors path="currency" cssClass="errors"></form:errors><br>
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +49,8 @@
                         <form:label path="date">Date</form:label>
                     </td>
                     <td>
-                        <form:input path="date" type="date" value="${account.date}"></form:input><br>
+                        <form:input path="date" type="date" value="${account.date}"></form:input>
+                        <form:errors path="date" cssClass="errors"></form:errors><br>
                     </td>
                 </tr>
             </tbody>

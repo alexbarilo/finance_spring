@@ -5,6 +5,7 @@
 <html>
 <head>
     <title></title>
+    <link href="${pageContext.request.contextPath}/resources/css/transactionpage_style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form:form action="newtransaction" method="post" modelAttribute="transaction">
@@ -14,7 +15,8 @@
                     <form:label path="benBankName">Beneficiary's bank name</form:label>
                 </td>
                 <td>
-                    <form:input path="benBankName"></form:input><br>
+                    <form:input path="benBankName"></form:input>
+                    <form:errors path="benBankName" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -22,7 +24,8 @@
                     <form:label path="benAccountNum">Beneficiary's account number</form:label>
                 </td>
                 <td>
-                    <form:input path="benAccountNum"></form:input><br>
+                    <form:input path="benAccountNum"></form:input>
+                    <form:errors path="benAccountNum" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -30,7 +33,8 @@
                     <form:label path="benAmount">Amount to remit</form:label>
                 </td>
                 <td>
-                    <form:input path="benAmount"></form:input><br>
+                    <form:input path="benAmount"></form:input>
+                    <form:errors path="benAmount" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -38,7 +42,8 @@
                     <form:label path="transactionDate">Date of transaction</form:label>
                 </td>
                 <td>
-                    <form:input path="transactionDate" type="date"></form:input><br>
+                    <form:input path="transactionDate" type="date"></form:input>
+                    <form:errors path="transactionDate" cssClass="error"></form:errors><br>
                 </td>
             </tr>
         </table>

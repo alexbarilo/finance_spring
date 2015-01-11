@@ -2,26 +2,38 @@ package org.financespring.model;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 @Table(name = "client")
 public class Client extends BaseEntity {
 
+    @NotEmpty(message = "Please input first name")
+    @Size(max = 30)
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @NotEmpty(message = "Please input last name")
+    @Size(max = 30)
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @NotEmpty(message = "Please input address")
+    @Size(max = 40)
     @Column(name = "address", nullable = false)
     private String address;
 
+    @NotEmpty(message = "Please input city")
+    @Size(max = 20)
     @Column(name = "city", nullable = false)
     private String city;
 
+    @NotEmpty(message = "Please input postal code")
+    @Size(max = 10)
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 

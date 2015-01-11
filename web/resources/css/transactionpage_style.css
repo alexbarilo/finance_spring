@@ -28,3 +28,7 @@
     border: 1px solid black;
     text-align: center;
 }
+
+.error {
+    color: red;
+}

@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,12 @@ public class ClientController {
     }
 
     @RequestMapping(value = "newclient", method = RequestMethod.POST)
-    public String addNewClient(@ModelAttribute(value = "client") Client client, Model model) {
+    public String addNewClient(@ModelAttribute(value = "client") @Valid Client client, BindingResult result,
+                               Model model) {
+        if (result.hasErrors()) {
+            return "newclientpage";
+        }
+
         if (client.getId() == 0) {
             clientService.saveEntity(client);
         } else {
@@ -43,7 +50,6 @@ public class ClientController {
         }
         List<Client> listOfClients = clientService.getListOfEntities();
         model.addAttribute("listOfClients", listOfClients);
-        //model.addAttribute("client", new Client()); //works without "client"
         return "clientpage";
     }
 

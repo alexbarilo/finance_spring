@@ -1,6 +1,10 @@
 package org.financespring.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
@@ -8,15 +12,21 @@ import java.util.Set;
 @Table(name = "bank_transaction")
 public class BankTransaction extends BaseEntity {
 
+    @NotEmpty(message = "Please input beneficiary's bank name")
+    @Size(max = 40)
     @Column(name = "ben_bank_name")
     private String benBankName;
 
+    @NotEmpty(message = "Please input beneficiary's account number")
+    @Size(max = 20)
     @Column(name = "ben_account_number")
     private String benAccountNum;
 
+    //@NotEmpty(message = "Please input amount to remit")
     @Column(name = "ben_amount")
     private float benAmount;
 
+    @NotEmpty(message = "Please choose date of transaction")
     @Column(name = "transaction_date")
     private String transactionDate;
 

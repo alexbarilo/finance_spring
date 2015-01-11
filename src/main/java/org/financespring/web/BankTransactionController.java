@@ -8,12 +8,14 @@ import org.financespring.service.BankTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @SessionAttributes("account")
@@ -33,8 +35,13 @@ public class BankTransactionController {
     }
 
     @RequestMapping(value = "newtransaction", method = RequestMethod.POST)
-    public String addNewBankTransaction(@ModelAttribute(value = "transaction") BankTransaction bankTransaction,
+    public String addNewBankTransaction(@ModelAttribute(value = "transaction") @Valid BankTransaction bankTransaction,
+                                        BindingResult result,
                                         HttpServletRequest request, Model model) {
+
+        if (result.hasErrors()) {
+            return "newtransactionpage";
+        }
 
         Account account = (Account) request.getSession().getAttribute("account");
         float transactionAmount = bankTransactionService.getTotalTransactionsAmount() + bankTransaction.getBenAmount();

@@ -18,3 +18,7 @@
 #account-popup {
     width: 200px;
 }
+
+.errors {
+    color: red;
+}

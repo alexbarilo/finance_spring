@@ -9,10 +9,12 @@ import org.financespring.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,8 +35,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "newaccount", method = RequestMethod.POST)
-    public String addNewAccount(@ModelAttribute(value = "account") Account account ,
+    public String addNewAccount(@ModelAttribute(value = "account") @Valid Account account ,
+                                BindingResult result,
                                 HttpServletRequest request, Model model) {
+
+        if (result.hasErrors()) {
+            return "newaccountpage";
+        }
 
         Client client = (Client) request.getSession().getAttribute("client");
         account.setClientId(client);

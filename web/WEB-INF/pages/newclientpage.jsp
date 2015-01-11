@@ -6,6 +6,7 @@
 <html>
 <head>
     <title></title>
+    <link href="${pageContext.request.contextPath}/resources/css/clientpage_style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form:form id="new-client" action="newclient" method="post" modelAttribute="client">
@@ -16,7 +17,8 @@
                     <form:label path="firstName">First name</form:label>
                 </td>
                 <td>
-                    <form:input path="firstName" value="${client.firstName}"></form:input><br>
+                    <form:input path="firstName" value="${client.firstName}"></form:input>
+                    <form:errors path="firstName" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -24,7 +26,8 @@
                     <form:label path="lastName">Last name</form:label>
                 </td>
                 <td>
-                    <form:input path="lastName" value="${client.lastName}"></form:input><br>
+                    <form:input path="lastName" value="${client.lastName}"></form:input>
+                    <form:errors path="lastName" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>\
@@ -32,7 +35,8 @@
                     <form:label path="address">Address</form:label>
                 </td>
                 <td>
-                    <form:input path="address" value="${client.address}"></form:input><br>
+                    <form:input path="address" value="${client.address}"></form:input>
+                    <form:errors path="address" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -40,7 +44,8 @@
                     <form:label path="city">City</form:label>
                 </td>
                 <td>
-                    <form:input path="city" value="${client.city}"></form:input><br>
+                    <form:input path="city" value="${client.city}"></form:input>
+                    <form:errors path="city" cssClass="error"></form:errors><br>
                 </td>
             </tr>
             <tr>
@@ -48,7 +53,8 @@
                     <form:label path="postalCode">Postal code</form:label>
                 </td>
                 <td>
-                    <form:input path="postalCode" vakue="${client.postalCode}"></form:input><br>
+                    <form:input path="postalCode" vakue="${client.postalCode}"></form:input>
+                    <form:errors path="postalCode" cssClass="error"></form:errors><br>
                 </td>
             </tr>
         </table>
