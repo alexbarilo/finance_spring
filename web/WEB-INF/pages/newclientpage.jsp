@@ -11,7 +11,7 @@
 <body>
     <form:form id="new-client" action="newclient" method="post" modelAttribute="client">
         <table>
-            <form:hidden path="id" value="${client.id}"/>
+            <form:hidden path="id" value="${client.id}"></form:hidden>
             <tr>
                 <td>
                     <form:label path="firstName">First name</form:label>
