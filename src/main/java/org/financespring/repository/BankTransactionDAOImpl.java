@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Implementation of BankTransactionsDAO-interface.
+ */
+
 @Repository
 public class BankTransactionDAOImpl implements BankTransactionDAO {
 

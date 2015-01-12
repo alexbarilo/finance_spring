@@ -3,7 +3,7 @@ package org.financespring.model;
 import javax.persistence.*;
 
 /**
- * Simple JavaBean domain object with id-property. Used as a base class for entities needing this property.
+ * JavaBean domain object with id-property. Used as a base class for entities needing this property.
  */
 @MappedSuperclass
 public class BaseEntity {

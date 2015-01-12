@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Implementation of AccountDAO-interface.
+ */
+
 @Repository
 public class AccountDAOImpl implements AccountDAO {
 

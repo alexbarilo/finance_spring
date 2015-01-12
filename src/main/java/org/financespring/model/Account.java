@@ -8,6 +8,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * JavaBean domain object which represents bank account. It has Many-to-One relationship with client domain object.
+ */
 @Entity
 @Table(name="account")
 public class Account extends BaseEntity {

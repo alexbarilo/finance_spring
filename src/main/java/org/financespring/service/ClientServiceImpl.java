@@ -8,6 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementation of ClientService-interface.
+ */
+
 @Service
 public class ClientServiceImpl implements ClientService {
 

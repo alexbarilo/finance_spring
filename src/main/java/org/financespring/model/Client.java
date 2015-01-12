@@ -8,6 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+/**
+ * JavaBean object which represents bank client.
+ */
 @Entity
 @Table(name = "client")
 public class Client extends BaseEntity {

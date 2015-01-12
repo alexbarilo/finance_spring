@@ -11,6 +11,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Implementation of AccountService-interface.
+ */
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -49,6 +53,12 @@ public class AccountServiceImpl implements AccountService {
         return listOfAccounts;
     }
 
+    /**
+     * The method saves Account-object and returns its persistent state (the same object with id).
+     * Persistent object is added as attribute to session scope.
+     * @param entity
+     * @return
+     */
     @Transactional
     public Account saveAndRetrieveEntity(Account entity) {
         Client client = entity.getClientId();
@@ -61,15 +71,15 @@ public class AccountServiceImpl implements AccountService {
         return entity;
     }
 
+    /**
+     * The method updates Account-object state and returns it.
+     * Persistent object is added as attribute to session scope.
+     * @param entity
+     * @return
+     */
     @Transactional
     public Account updateAndRetrieveEntity(Account entity) {
-        Client client = entity.getClientId();
-        Set<Account> setOfAccounts = client.getSetOfAccounts();
-
-        setOfAccounts.add(entity);
         accountDAO.updateEntity(entity);
-        entity = accountDAO.getEntityById(Account.class, entity.getId());
-
         return entity;
     }
 }

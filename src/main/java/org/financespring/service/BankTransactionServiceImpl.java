@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Implementation of BankTransactionService-interface.
+ */
+
 @Service
 public class BankTransactionServiceImpl implements BankTransactionService {
 
@@ -28,6 +32,11 @@ public class BankTransactionServiceImpl implements BankTransactionService {
         return listOfTransactions;
     }
 
+    /**
+     * The method returns sum of all bank transaction amounts.
+     * The result is used to calculate whether a next bank transaction overdrafts account amount.
+     * @return
+     */
     @Override
     @Transactional
     public float getTotalTransactionsAmount() {

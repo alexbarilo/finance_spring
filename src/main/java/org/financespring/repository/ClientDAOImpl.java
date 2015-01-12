@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Implementation of ClientDAO-interface.
+ */
+
 @Repository
 public class ClientDAOImpl implements ClientDAO {
 
