@@ -27,6 +27,9 @@ public class AccountController {
     @Autowired
     private ClientService clientService;
 
+    /*
+    Method is used when user needs to come back to accountpage.jsp from newaccountpage.jsp
+     */
     @RequestMapping(value = "clientdetails", method = RequestMethod.GET)
     public String showClientDetails(Model model) {
         Account account = new Account();
@@ -34,11 +37,14 @@ public class AccountController {
         return "accountpage";
     }
 
+    /*
+    Method saves/updates account-object.
+     */
     @RequestMapping(value = "newaccount", method = RequestMethod.POST)
     public String addNewAccount(@ModelAttribute(value = "account") @Valid Account account ,
                                 BindingResult result,
                                 HttpServletRequest request, Model model) {
-
+        //Form validation. If errors occur user redirects to the same page with notifications.
         if (result.hasErrors()) {
             return "newaccountpage";
         }
@@ -61,6 +67,9 @@ public class AccountController {
         return "accountpage";
     }
 
+    /*
+    Method services requests from "clientselection" form. It defines actions according to which submit-button is pressed.
+     */
     @RequestMapping(value = "accountselection", method = RequestMethod.POST)
     public String processAccountCRUD(HttpServletRequest request, Model model) {
 
@@ -80,6 +89,7 @@ public class AccountController {
                 chosenAccountAction = "newaccountpage";
                 break;
             case "delaccount" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
@@ -90,12 +100,17 @@ public class AccountController {
                 Account currentAccount = accountService.getEntityById(Account.class, accountId);
                 accountService.deleteEntity(currentAccount);
                 Client currentClient = (Client) request.getSession().getAttribute("client");
+                /*
+                Renews "client" session attribute. As the list of accounts is retrieved from client-object
+                we have to keep it up to date.
+                */
                 currentClient = clientService.getEntityById(Client.class, currentClient.getId());
                 account = new Account();
                 model.addAttribute("client", currentClient);
                 model.addAttribute("account", account);
                 break;
             case "editaccount" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
@@ -103,12 +118,14 @@ public class AccountController {
                     request.setAttribute("action", "clientdetails");
                     return "error-page";
                 }
+                //Adds account-object as attribute to request. Its fields are used to fill the form to edit.
                 account = accountService.getEntityById(Account.class, accountId);
                 model.addAttribute("account", account);
 
                 chosenAccountAction = "newaccountpage";
                 break;
             case "showaccountdetails" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {
@@ -122,6 +139,7 @@ public class AccountController {
                 chosenAccountAction = "transactionpage";
                 break;
             case "addtransaction" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     accountId = Integer.parseInt(selectedAccount);
                 } catch (NumberFormatException e) {

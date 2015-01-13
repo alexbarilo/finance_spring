@@ -27,6 +27,9 @@ public class ClientController {
     @Autowired
     private AccountService accountService;
 
+    /*Method initialises form with the list of clients to choose. It adds new client-object as model attribute
+     in "clientselection" form.
+      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initNewClientForm(ModelMap model) {
         Client client = new Client();
@@ -36,6 +39,9 @@ public class ClientController {
         return "clientpage";
     }
 
+    /*
+    Method saves/updates client-object.
+     */
     @RequestMapping(value = "newclient", method = RequestMethod.POST)
     public String addNewClient(@ModelAttribute(value = "client") @Valid Client client, BindingResult result,
                                Model model) {
@@ -53,6 +59,9 @@ public class ClientController {
         return "clientpage";
     }
 
+    /*
+    Method services requests from "clientselection" form. It defines actions according to which submit-button is pressed.
+     */
     @RequestMapping(value = "clientselection", method = RequestMethod.POST)
     public String processClientCRUD(HttpServletRequest request, Model model) {
 
@@ -72,6 +81,7 @@ public class ClientController {
                 chosenClientAction = "newclientpage";
                 break;
             case "delclient" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
@@ -81,10 +91,12 @@ public class ClientController {
                 }
                 Client currentClient = clientService.getEntityById(Client.class, clientId);
                 clientService.deleteEntity(currentClient);
+                //Renews session attribute "listOfClients" after deleting the client-object.
                 List<Client> listOfClients = clientService.getListOfEntities();
                 model.addAttribute("listOfClients", listOfClients);
                 break;
             case "editclient" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
@@ -92,12 +104,14 @@ public class ClientController {
                     request.setAttribute("action", "/");
                     return "error-page";
                 }
+                //Adds client-object as attribute to request. Its fields are used to fill the form to edit.
                 currentClient = clientService.getEntityById(Client.class, clientId);
                 model.addAttribute("client", currentClient);
 
                 chosenClientAction = "newclientpage";
                 break;
             case "showclientdetails" :
+                //If no client is chosen NumberFormatException is thrown and user is redirected to error-page.
                 try {
                     clientId = Integer.parseInt(selectedClient);
                 } catch (NumberFormatException e) {
@@ -106,10 +120,8 @@ public class ClientController {
                     return "error-page";
                 }
                 currentClient = clientService.getEntityById(Client.class, clientId);
-                listOfClients = clientService.getListOfEntities();
                 Account account = new Account();
                 model.addAttribute("client", currentClient);
-                model.addAttribute("listOfClients", listOfClients);
                 model.addAttribute("account", account);
 
                 chosenClientAction = "accountpage";

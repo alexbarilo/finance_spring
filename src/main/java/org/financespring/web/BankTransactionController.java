@@ -27,6 +27,9 @@ public class BankTransactionController {
     @Autowired
     private AccountService accountService;
 
+    /*
+    Method is used when user needs to come back to accountpage.jsp from newaccountpage.jsp.
+     */
     @RequestMapping(value = "accountdetails", method = RequestMethod.GET)
     public String showAccountDetails(Model model) {
         Client client = new Client();
@@ -34,11 +37,14 @@ public class BankTransactionController {
         return "accountpage";
     }
 
+    /*
+    Method saves/updates bank transaction-object.
+     */
     @RequestMapping(value = "newtransaction", method = RequestMethod.POST)
     public String addNewBankTransaction(@ModelAttribute(value = "transaction") @Valid BankTransaction bankTransaction,
                                         BindingResult result,
                                         HttpServletRequest request, Model model) {
-
+        //Form validation. If errors occur user redirects to the same page with notifications.
         if (result.hasErrors()) {
             return "newtransactionpage";
         }
@@ -47,6 +53,7 @@ public class BankTransactionController {
         float transactionAmount = bankTransactionService.getTotalTransactionsAmount() + bankTransaction.getBenAmount();
         float currentAccountAmount = account.getAmount();
 
+        //Defines if total amount of all transactions including the current one overdrafts account amount.
         if(transactionAmount > currentAccountAmount) {
             request.setAttribute("message", "The account amount is insufficient to provide current transaction");
             request.setAttribute("action", "accountdetails");
