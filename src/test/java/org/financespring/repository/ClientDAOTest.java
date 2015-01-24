@@ -2,7 +2,6 @@ package org.financespring.repository;
 
 import junit.framework.Assert;
 import org.financespring.model.Client;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
@@ -25,7 +24,7 @@ public class ClientDAOTest {
     @Autowired
     private ClientDAO clientDAO;
 
-    static Client currentClient;
+    private static Client currentClient;
 
     /*
     Create Client object to test CRUD operations.
@@ -43,7 +42,8 @@ public class ClientDAOTest {
     @Test
     @Transactional
     public void testGetEntityById() {
-        Client client  = clientDAO.getEntityById(Client.class, this.getTestedClient().getId());
+        Client client = this.getTestedClient();
+        client  = clientDAO.getEntityById(Client.class, client.getId());
         Assert.assertNotNull(client);
         Assert.assertEquals("Bruno", client.getFirstName());
         Assert.assertEquals("Prosato", client.getLastName());
@@ -93,8 +93,8 @@ public class ClientDAOTest {
     }
 
     /*
-    Common functionality for the most of test methods. As after each CRUD-operation transaction is rolled back
-    it needs the test Client object to be saved.
+    Common functionality for the most of test methods. As after each test method the current transaction is rolled back
+    the test Client object needs to be saved before any test method is fulfilled.
      */
     public Client getTestedClient() {
         clientDAO.saveEntity(currentClient);
