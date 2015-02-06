@@ -86,4 +86,5 @@ public class Account extends BaseEntity {
     public void setSetOfTransactions(Set<BankTransaction> setOfTransactions) {
         this.setOfTransactions = setOfTransactions;
     }
+
 }

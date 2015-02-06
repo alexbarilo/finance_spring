@@ -6,7 +6,7 @@
 <html>
 <head>
     <title></title>
-    <link href="/resources/css/clientpage_style.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/css/clientpage_style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form:form action="clientselection" method="post" modelAttribute="client">

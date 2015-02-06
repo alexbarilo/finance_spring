@@ -4,7 +4,7 @@
 <html>
 <head>
     <title></title>
-    <link href="/resources/css/transactionpage_style.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/css/transactionpage_style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <jsp:include page="accountpage.jsp"/>
